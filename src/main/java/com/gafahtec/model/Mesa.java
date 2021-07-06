@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,8 +30,8 @@ public class Mesa {
 	private String codigo;
 
 	private boolean activo;
-	
-	@Builder.Default
-	@OneToMany(mappedBy = "mesa", cascade = { CascadeType.ALL }, orphanRemoval = true)
-	private List<Pedido> pedidos  = new ArrayList<>();;
+//	@JsonIgnore
+//	@Builder.Default
+//	@OneToMany(mappedBy = "mesa", cascade = { CascadeType.ALL }, orphanRemoval = true)
+//	private List<Pedido> pedidos  = new ArrayList<>();;
 }

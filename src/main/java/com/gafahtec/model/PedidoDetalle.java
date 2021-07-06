@@ -26,6 +26,9 @@ public class PedidoDetalle {
 	private Integer idPedidoDetalle;
 	
 	@ManyToOne
+	@JoinColumn(name = "id_pedido", nullable = false, foreignKey = @ForeignKey(name = "FK_pedido"))
+	private Pedido pedido;
+	@ManyToOne
 	@JoinColumn(name = "id_producto", nullable = false, foreignKey = @ForeignKey(name = "FK_producto_pedido"))
 	private Producto producto;
 	private Integer cantidad;

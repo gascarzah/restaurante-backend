@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gafahtec.dto.PedidoDto;
 import com.gafahtec.exception.ModeloNotFoundException;
 import com.gafahtec.model.Pedido;
 import com.gafahtec.service.IPedidoService;
@@ -45,13 +46,19 @@ public class PedidoController {
 		
 		return new ResponseEntity<Pedido>(obj, HttpStatus.OK);
 	}
-	
 	@PostMapping
-	public ResponseEntity<Pedido> registrar(@Valid @RequestBody Pedido p) throws Exception{
-		Pedido obj = iPedidoService.registrar(p);
+	public ResponseEntity<Pedido> registrar(@Valid @RequestBody PedidoDto p) throws Exception{
+		Pedido obj = iPedidoService.registrarYObtener(p);
+		
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdPedido()).toUri();
 		return ResponseEntity.created(location).build();
 	}
+//	@PostMapping
+//	public ResponseEntity<Pedido> registrar(@Valid @RequestBody Pedido p) throws Exception{
+//		Pedido obj = iPedidoService.registrar(p);
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdPedido()).toUri();
+//		return ResponseEntity.created(location).build();
+//	}
 	
 	@PutMapping
 	public ResponseEntity<Pedido> modificar(@Valid @RequestBody Pedido p) throws Exception{

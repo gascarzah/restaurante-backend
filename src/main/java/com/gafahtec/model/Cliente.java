@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,7 +44,7 @@ public class Cliente {
 	 @CreationTimestamp
 	 @Column(updatable = false)
 	private LocalDateTime fechaRegistro;
-	
+	 @JsonIgnore
 	@Builder.Default
 	@OneToMany(mappedBy = "cliente", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	private List<Venta> ventas  = new ArrayList<>();

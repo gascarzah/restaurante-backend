@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -45,7 +47,7 @@ public class Compra {
 	private Float valor;
 	private Float igv;
 	private Float total;
-	
+	@JsonIgnore
 	@Builder.Default
 	@OneToMany(mappedBy = "compra", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	private List<CompraDetalle> compradetalles = new ArrayList<>();;

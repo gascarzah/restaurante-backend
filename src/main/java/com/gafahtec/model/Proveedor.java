@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,6 +43,7 @@ public class Proveedor {
 	 @CreationTimestamp
 	 @Column(updatable = false)
 	private LocalDateTime fechaRegistro;
+	 @JsonIgnore
 	@Builder.Default
 	@OneToMany(mappedBy = "proveedor", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	private List<Compra> compras = new ArrayList<>();;

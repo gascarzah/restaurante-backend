@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,10 +27,11 @@ public class TipoRecibo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idTipoRecibo;
 	private String nombre;
+	@JsonIgnore
 	@Builder.Default
 	@OneToMany(mappedBy = "tipoRecibo", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	private List<Compra> compras = new ArrayList<>();;
-	
+	@JsonIgnore
 	@Builder.Default
 	@OneToMany(mappedBy = "tipoRecibo", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	private List<Venta> ventas = new ArrayList<>();;
