@@ -31,8 +31,8 @@ public class Destino {
 	
 	private String descripcion;
 	
-	 @JsonIgnore
-	@Builder.Default
-	@OneToMany(mappedBy = "destino", cascade = { CascadeType.ALL }, orphanRemoval = true)
-	private List<Producto> productos  = new ArrayList<>();
+//	 @JsonIgnore
+//	@Builder.Default
+//	@OneToMany(mappedBy = "destino", cascade = { CascadeType.ALL }, orphanRemoval = true)
+//	private List<Producto> productos  = new ArrayList<>();
 }

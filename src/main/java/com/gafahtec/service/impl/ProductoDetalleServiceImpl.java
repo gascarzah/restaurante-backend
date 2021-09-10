@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.gafahtec.model.Producto;
 import com.gafahtec.model.ProductoDetalle;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.repository.IProductoDetalleRepository;
 import com.gafahtec.service.IProductoDetalleService;
 
@@ -19,7 +19,7 @@ public class ProductoDetalleServiceImpl  extends CRUDImpl<ProductoDetalle, Integ
 	private IProductoDetalleRepository repo;
 	
 	@Override
-	protected IGenericRepo<ProductoDetalle, Integer> getRepo() {
+	protected IGenericRepository<ProductoDetalle, Integer> getRepo() {
 		
 		return repo;
 	}

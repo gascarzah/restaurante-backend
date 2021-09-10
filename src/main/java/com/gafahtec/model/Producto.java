@@ -28,7 +28,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString(exclude = {"categoriaProducto","destino", "productoDetalles", "pedidoDetalles" })
+@ToString(exclude = { "productoDetalles", "pedidoDetalles" })
+//@ToString(exclude = {"categoriaProducto","destino", "productoDetalles", "pedidoDetalles" })
 public class Producto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,13 +40,14 @@ public class Producto {
 	private String nombre;
 	private String descripcion;
 	private Float precio;
+	private Integer stock;
 	@ManyToOne
 	@JoinColumn(name = "id_categoria_producto", nullable = false, foreignKey = @ForeignKey(name = "FK_producto_categoria"))
 	private CategoriaProducto categoriaProducto;
 	private String imagen;
-	@ManyToOne
-	@JoinColumn(name = "id_destino", nullable = false, foreignKey = @ForeignKey(name = "FK_destino_producto"))
-	private Destino destino;
+//	@ManyToOne
+//	@JoinColumn(name = "id_destino", nullable = true, foreignKey = @ForeignKey(name = "FK_destino_producto"))
+//	private Destino destino;
 	private String randomId;
 	
 	@JsonIgnore

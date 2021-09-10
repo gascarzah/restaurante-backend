@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.gafahtec.model.CompraDetalle;
 import com.gafahtec.repository.ICompraDetalleRepository;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.service.ICompraDetalleService;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class CompraDetalleServiceImpl  extends CRUDImpl<CompraDetalle, Integer> 
 	private ICompraDetalleRepository repo;
 	
 	@Override
-	protected IGenericRepo<CompraDetalle, Integer> getRepo() {
+	protected IGenericRepository<CompraDetalle, Integer> getRepo() {
 		
 		return repo;
 	}

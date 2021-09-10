@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.gafahtec.model.Destino;
 import com.gafahtec.repository.IDestinoRepository;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.service.IDestinoService;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class DestinoServiceImpl  extends CRUDImpl<Destino, Integer>  implements 
 	private IDestinoRepository repo;
 	
 	@Override
-	protected IGenericRepo<Destino, Integer> getRepo() {
+	protected IGenericRepository<Destino, Integer> getRepo() {
 		
 		return repo;
 	}

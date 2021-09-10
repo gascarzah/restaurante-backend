@@ -30,6 +30,7 @@ public class Mesa {
 	private String codigo;
 
 	private boolean activo;
+	private boolean ocupado;
 //	@JsonIgnore
 //	@Builder.Default
 //	@OneToMany(mappedBy = "mesa", cascade = { CascadeType.ALL }, orphanRemoval = true)

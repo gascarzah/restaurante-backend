@@ -70,4 +70,10 @@ public class PedidoDetalleController {
 		iPedidoDetalleService.eliminar(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
+	
+	@GetMapping("/pedido/{id}")
+	public ResponseEntity<List<PedidoDetalle>> listar(@PathVariable("id") Integer id) throws Exception{
+		List<PedidoDetalle> lista = iPedidoDetalleService.listarPedidoDetallePorPedido(id);
+		return new ResponseEntity<List<PedidoDetalle>>(lista, HttpStatus.OK);
+	}
 }

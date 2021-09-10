@@ -49,16 +49,26 @@ public class ClienteController {
 		return new ResponseEntity<Cliente>(obj, HttpStatus.OK);
 	}
 	
+	
+//	@PostMapping
+//	public ResponseEntity<Cliente> registrar(@Valid @RequestBody Cliente p) throws Exception{
+////		Cliente obj = iClienteService.registrar(p);
+//		Cliente obj = iClienteService.registrarYObtener(p);
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdCliente()).toUri();
+//		return ResponseEntity.created(location).build();
+//	}
+	
 	@PostMapping
 	public ResponseEntity<Cliente> registrar(@Valid @RequestBody Cliente p) throws Exception{
-		Cliente obj = iClienteService.registrar(p);
+//		Cliente obj = iClienteService.registrar(p);
+		Cliente obj = iClienteService.registrarYObtener(p);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdCliente()).toUri();
-		return ResponseEntity.created(location).build();
+		return  new ResponseEntity<Cliente>(obj, HttpStatus.OK);
 	}
 	
 	@PutMapping
 	public ResponseEntity<Cliente> modificar(@Valid @RequestBody Cliente p) throws Exception{
-		System.out.println(p);
+//		System.out.println(p);
 		Cliente obj = iClienteService.modificar(p);
 		return new ResponseEntity<Cliente>(obj, HttpStatus.OK);
 	}

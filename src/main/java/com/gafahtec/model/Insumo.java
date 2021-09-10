@@ -19,12 +19,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 @Data
 @Entity
 @Table
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = {"compraDetalles" })
 public class Insumo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +44,8 @@ public class Insumo {
 	private CategoriaInsumo categoriaInsumo;
 	
 	private Integer cantidadPorMedida;
-	private Integer stockMinimo;
+	@Builder.Default
+	private Integer stockMinimo = 0;
 	private Float precioSugerido;
 
 	@JsonIgnore

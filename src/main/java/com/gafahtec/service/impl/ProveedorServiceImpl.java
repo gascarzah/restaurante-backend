@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.gafahtec.model.Proveedor;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.repository.IProveedorRepository;
 import com.gafahtec.service.IProveedorService;
 
@@ -18,7 +18,7 @@ public class ProveedorServiceImpl  extends CRUDImpl<Proveedor, Integer>  impleme
 	private IProveedorRepository repo;
 	
 	@Override
-	protected IGenericRepo<Proveedor, Integer> getRepo() {
+	protected IGenericRepository<Proveedor, Integer> getRepo() {
 		
 		return repo;
 	}

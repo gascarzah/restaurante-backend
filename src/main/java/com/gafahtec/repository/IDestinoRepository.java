@@ -2,6 +2,6 @@ package com.gafahtec.repository;
 
 import com.gafahtec.model.Destino;
 
-public interface IDestinoRepository extends IGenericRepo<Destino, Integer>{
+public interface IDestinoRepository extends IGenericRepository<Destino, Integer>{
 
 }

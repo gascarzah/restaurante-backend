@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.gafahtec.model.Empleado;
 import com.gafahtec.repository.IEmpleadoRepository;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.service.IEmpleadoService;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ public class EmpleadoServiceImpl  extends CRUDImpl<Empleado, Integer>  implement
 	private IEmpleadoRepository repo;
 	
 	@Override
-	protected IGenericRepo<Empleado, Integer> getRepo() {
+	protected IGenericRepository<Empleado, Integer> getRepo() {
 		
 		return repo;
 	}

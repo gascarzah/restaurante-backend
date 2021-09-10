@@ -1,12 +1,18 @@
 package com.gafahtec.service.impl;
 import java.util.List;
 
-import com.gafahtec.repository.IGenericRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.service.ICRUD;
+import com.gafahtec.socket.service.WebSocketService;
 
 public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
 
-	protected abstract IGenericRepo<T, ID> getRepo();
+	protected abstract IGenericRepository<T, ID> getRepo();
+
+	
+//	protected abstract String getEntityTopic();
 	
 	@Override
 	public T registrar(T t) throws Exception {
@@ -32,5 +38,16 @@ public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
 	public void eliminar(ID id) throws Exception {
 		getRepo().deleteById(id);
 	}
+//	@Autowired
+//	private WebSocketService webSocketService;
+//    private void notifyFrontend() {
+//        final String entityTopic = getEntityTopic();
+//        if (entityTopic == null) {
+//            LOG.error("Failed to get entity topic");
+//            return;
+//        }
+//
+//        webSocketService.sendMessage(entityTopic);
+//    }
 
 }

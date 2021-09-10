@@ -1,11 +1,13 @@
 package com.gafahtec.service.impl;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.gafahtec.model.Mesa;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.repository.IMesaRepository;
 import com.gafahtec.service.IMesaService;
 
@@ -18,7 +20,7 @@ public class MesaServiceImpl  extends CRUDImpl<Mesa, Integer>  implements IMesaS
 	private IMesaRepository repo;
 	
 	@Override
-	protected IGenericRepo<Mesa, Integer> getRepo() {
+	protected IGenericRepository<Mesa, Integer> getRepo() {
 		
 		return repo;
 	}
@@ -26,5 +28,13 @@ public class MesaServiceImpl  extends CRUDImpl<Mesa, Integer>  implements IMesaS
 	@Override
 	public Page<Mesa> listarPageable(Pageable pageable) {
 		return repo.findAll(pageable);
+	}
+
+	@Override
+	public List<Mesa> listarMesasDesocupadas() {
+//		System.out.println("lista");
+		System.out.println(repo.findByOcupado(false));
+		
+		return repo.findByOcupado(false);
 	}
 }

@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.gafahtec.model.Insumo;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.repository.IInsumoRepository;
 import com.gafahtec.service.IInsumoService;
 
@@ -18,7 +18,7 @@ public class InsumoServiceImpl  extends CRUDImpl<Insumo, Integer>  implements II
 	private IInsumoRepository repo;
 	
 	@Override
-	protected IGenericRepo<Insumo, Integer> getRepo() {
+	protected IGenericRepository<Insumo, Integer> getRepo() {
 		
 		return repo;
 	}

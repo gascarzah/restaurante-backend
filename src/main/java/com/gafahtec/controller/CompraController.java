@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gafahtec.dto.CompraDto;
 import com.gafahtec.exception.ModeloNotFoundException;
 import com.gafahtec.model.Compra;
 import com.gafahtec.service.ICompraService;
@@ -45,13 +46,18 @@ public class CompraController {
 		
 		return new ResponseEntity<Compra>(obj, HttpStatus.OK);
 	}
-	
 	@PostMapping
-	public ResponseEntity<Compra> registrar(@Valid @RequestBody Compra p) throws Exception{
-		Compra obj = iCompraService.registrar(p);
+	public ResponseEntity<Compra> registrar(@Valid @RequestBody CompraDto dto) throws Exception{
+		Compra obj = iCompraService.registrarTransaccional(dto);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdCompra()).toUri();
 		return ResponseEntity.created(location).build();
 	}
+//	@PostMapping
+//	public ResponseEntity<Compra> registrar(@Valid @RequestBody Compra p) throws Exception{
+//		Compra obj = iCompraService.registrar(p);
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdCompra()).toUri();
+//		return ResponseEntity.created(location).build();
+//	}
 	
 	@PutMapping
 	public ResponseEntity<Compra> modificar(@Valid @RequestBody Compra p) throws Exception{

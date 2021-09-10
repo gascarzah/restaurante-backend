@@ -33,7 +33,8 @@ public class MesaController {
 	
 	@GetMapping
 	public ResponseEntity<List<Mesa>> listar() throws Exception{
-		List<Mesa> lista = iMesaService.listar();
+		List<Mesa> lista = iMesaService.listarMesasDesocupadas();
+//		System.out.println(lista);
 		return new ResponseEntity<List<Mesa>>(lista, HttpStatus.OK);
 	}
 	

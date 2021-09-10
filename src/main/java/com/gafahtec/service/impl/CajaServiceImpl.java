@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.gafahtec.model.Caja;
 import com.gafahtec.repository.ICajaRepository;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.service.ICajaService;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class CajaServiceImpl extends CRUDImpl<Caja, Integer>  implements ICajaSe
 	private ICajaRepository repo;
 	
 	@Override
-	protected IGenericRepo<Caja, Integer> getRepo() {
+	protected IGenericRepository<Caja, Integer> getRepo() {
 		
 		return repo;
 	}

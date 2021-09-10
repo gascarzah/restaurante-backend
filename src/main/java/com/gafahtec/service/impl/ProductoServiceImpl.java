@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.gafahtec.dto.ProductoDto;
 import com.gafahtec.model.Producto;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.repository.IProductoDetalleRepository;
 import com.gafahtec.repository.IProductoRepository;
 import com.gafahtec.service.IProductoService;
@@ -29,7 +29,7 @@ public class ProductoServiceImpl  extends CRUDImpl<Producto, Integer>  implement
 	private IProductoDetalleRepository detRepo;
 	
 	@Override
-	protected IGenericRepo<Producto, Integer> getRepo() {
+	protected IGenericRepository<Producto, Integer> getRepo() {
 		
 		return repo;
 	}
@@ -44,6 +44,10 @@ public class ProductoServiceImpl  extends CRUDImpl<Producto, Integer>  implement
 		return repo.findAll(Sort.by("nombre"));
 	}
 	
+	public List<Producto> listarPorCategoria(Integer idCategoriaProducto) {		
+		return repo.findByCategoriaProducto(idCategoriaProducto);
+	}
+	
 	@Transactional
 	@Override
 	public Producto registrarYObtener(@Valid ProductoDto dto) {
@@ -55,7 +59,7 @@ public class ProductoServiceImpl  extends CRUDImpl<Producto, Integer>  implement
 		repo.save(dto.getProducto());
 		
 		Producto p = repo.findByRandomId(randomId).get(0);
-		System.out.println(dto.getProducto());
+//		System.out.println(dto.getProducto());
 		dto.getProductoDetalles().forEach(pd ->{
 			pd.setProducto(p);
 			detRepo.save(pd);

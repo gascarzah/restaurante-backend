@@ -55,9 +55,10 @@ public class ProductoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Producto> registrar(@Valid @RequestBody ProductoDto p) throws Exception{
-		Producto obj = iProductoService.registrarYObtener(p);
-		System.out.println("obj "+ obj);
+	public ResponseEntity<Producto> registrar(@Valid @RequestBody Producto p) throws Exception{
+//		Producto obj = iProductoService.registrarYObtener(p);
+		Producto obj = iProductoService.registrar(p);
+//		System.out.println("obj "+ obj);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdProducto()).toUri();
 		return ResponseEntity.created(location).build();
 	}
@@ -84,5 +85,12 @@ public class ProductoController {
 	public ResponseEntity<Page<Producto>> listarPageable(@PageableDefault(sort = "nombre")Pageable pageable) throws Exception{			
 		Page<Producto> paginas = iProductoService.listarPageable(pageable);
 		return new ResponseEntity<Page<Producto>>(paginas, HttpStatus.OK);
+	}
+	
+	@GetMapping("/categoria/{idCategoriaProducto}")
+	public ResponseEntity<List<Producto>> listarPorCategoria(@PathVariable("idCategoriaProducto") Integer idCategoriaProducto) throws Exception{
+//		logger.info("ingreso a listar");
+		List<Producto> lista = iProductoService.listarPorCategoria(idCategoriaProducto);
+		return new ResponseEntity<List<Producto>>(lista, HttpStatus.OK);
 	}
 }

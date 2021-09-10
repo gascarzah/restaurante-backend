@@ -41,12 +41,13 @@ public class Cliente {
 	private String telefono;
 	private String email;
 	private String direccion;
+	private String randomId;
 	 @CreationTimestamp
 	 @Column(updatable = false)
 	private LocalDateTime fechaRegistro;
 	 @JsonIgnore
 	@Builder.Default
 	@OneToMany(mappedBy = "cliente", cascade = { CascadeType.ALL }, orphanRemoval = true)
-	private List<Venta> ventas  = new ArrayList<>();
+	private List<Pedido> pedidos  = new ArrayList<>();
 	
 }

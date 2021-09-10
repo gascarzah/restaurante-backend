@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.gafahtec.model.CategoriaInsumo;
 import com.gafahtec.repository.ICategoriaInsumoRepository;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.service.ICategoriaInsumoService;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ public class CategoriaInsumoServiceImpl  extends CRUDImpl<CategoriaInsumo, Integ
 	private ICategoriaInsumoRepository repo;
 	
 	@Override
-	protected IGenericRepo<CategoriaInsumo, Integer> getRepo() {
+	protected IGenericRepository<CategoriaInsumo, Integer> getRepo() {
 		
 		return repo;
 	}

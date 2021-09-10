@@ -34,8 +34,8 @@ public class CompraDetalle {
 	@ManyToOne
 	@JoinColumn(name = "id_insumo", nullable = false, foreignKey = @ForeignKey(name = "FK_insumo_compra"))
 	private Insumo insumo;
-	
-	private Float precio;
-	private Integer stock;
+	private Integer cantidad;
+	private Float precioUnidad;
+//	private Integer stock;
 	
 }

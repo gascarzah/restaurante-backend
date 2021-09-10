@@ -3,7 +3,7 @@ package com.gafahtec.service.impl;
 import org.springframework.stereotype.Service;
 
 import com.gafahtec.model.Unidad;
-import com.gafahtec.repository.IGenericRepo;
+import com.gafahtec.repository.IGenericRepository;
 import com.gafahtec.repository.IUnidadRepository;
 import com.gafahtec.service.IUnidadService;
 
@@ -16,7 +16,7 @@ public class UnidadServiceImpl  extends CRUDImpl<Unidad, Integer>  implements IU
 	private IUnidadRepository repo;
 	
 	@Override
-	protected IGenericRepo<Unidad, Integer> getRepo() {
+	protected IGenericRepository<Unidad, Integer> getRepo() {
 		
 		return repo;
 	}

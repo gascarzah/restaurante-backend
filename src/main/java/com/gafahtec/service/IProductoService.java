@@ -18,8 +18,9 @@ public interface IProductoService extends ICRUD<Producto, Integer>{
 	public List<Producto> listarOrderNombre();
 
 
-	
+	public List<Producto> listarPorCategoria(Integer idCategoriaProducto);
 
+	
 
 	Producto registrarYObtener(@Valid ProductoDto p);
 
