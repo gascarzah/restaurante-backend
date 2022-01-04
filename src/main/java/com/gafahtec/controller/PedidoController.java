@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +27,7 @@ import com.gafahtec.dto.VentaDto;
 import com.gafahtec.exception.ModeloNotFoundException;
 import com.gafahtec.model.Mesa;
 import com.gafahtec.model.Pedido;
+import com.gafahtec.model.Producto;
 import com.gafahtec.model.Venta;
 import com.gafahtec.service.IPedidoService;
 
@@ -37,12 +39,25 @@ public class PedidoController {
 
 	private IPedidoService iPedidoService;
 	
-	@GetMapping
-	public ResponseEntity<List<Pedido>> listar() throws Exception{
-		List<Pedido> lista = iPedidoService.listar();
-		
-		return new ResponseEntity<List<Pedido>>(lista, HttpStatus.OK);
-	}
+//	@GetMapping
+//	public ResponseEntity<List<Pedido>> listar() throws Exception{
+//		List<Pedido> lista = iPedidoService.listar();
+//		
+//		return new ResponseEntity<List<Pedido>>(lista, HttpStatus.OK);
+//	}
+//	@GetMapping
+//	public ResponseEntity<List<Pedido>> listar() throws Exception{
+//		Page<Pedido> lista = public Page<Pedido> findByTipoVenta(Integer idTipoPedido, Pageable pageable)
+//		
+//		return new ResponseEntity<List<Pedido>>(lista, HttpStatus.OK);
+//	}
+	
+	
+//	@GetMapping("/tipoVentapageable")
+//	public ResponseEntity<Page<Pedido>> listarTipoVentaPageable(Pageable tipoVentapageable) throws Exception{			
+//		Page<Pedido> paginas = iPedidoService.findByTipoVenta(1, tipoVentapageable);
+//		return new ResponseEntity<Page<Pedido>>(paginas, HttpStatus.OK);
+//	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Pedido> listarPorId(@PathVariable("id") Integer id) throws Exception{
@@ -96,7 +111,7 @@ public class PedidoController {
 	@GetMapping("/pageable")
 	public ResponseEntity<Page<PedidoBean>> listarPageable(Pageable pageable) throws Exception{			
 		Page<PedidoBean> paginas = iPedidoService.listarPageableConDetalle(pageable);
-		System.out.println(paginas);
+//		System.out.println(paginas);
 		return new ResponseEntity<Page<PedidoBean>>(paginas, HttpStatus.OK);
 	}
 	

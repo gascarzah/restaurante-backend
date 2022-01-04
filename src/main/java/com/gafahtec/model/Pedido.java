@@ -42,10 +42,10 @@ public class Pedido {
 //	@ManyToOne
 //	@JoinColumn(name = "id_mesa", nullable = true, foreignKey = @ForeignKey(name = "FK_pedido_mesa"))
 //    private Mesa mesa;
-//	
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	@JoinTable(name = "mesa_pedido", joinColumns = @JoinColumn(name = "id_pedido", referencedColumnName = "idPedido"), inverseJoinColumns = @JoinColumn(name = "id_mesa", referencedColumnName = "idMesa"))
-//	private List<Mesa> mesas;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "mesa_pedido", joinColumns = @JoinColumn(name = "id_pedido", referencedColumnName = "idPedido"), inverseJoinColumns = @JoinColumn(name = "id_mesa", referencedColumnName = "idMesa"))
+	private List<Mesa> mesas;
 
 	@ManyToOne
 	@JoinColumn(name = "id_empleado", nullable = true, foreignKey = @ForeignKey(name = "FK_pedido_empleado"))
@@ -54,6 +54,11 @@ public class Pedido {
 	@ManyToOne
 	@JoinColumn(name = "id_cliente", nullable = true, foreignKey = @ForeignKey(name = "FK_venta_cliente"))
 	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_tipo_pedido", nullable = true, foreignKey = @ForeignKey(name = "FK_tipo_pedido"))
+	private TipoPedido tipoPedido;
+	
 	 @CreationTimestamp
 	 @Column(updatable = false)
 	private LocalDateTime fecha;
@@ -71,4 +76,6 @@ public class Pedido {
 	@Builder.Default
 	@OneToMany(mappedBy = "pedido", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	private List<Venta> ventas  = new ArrayList<>();
+	
+	
 }

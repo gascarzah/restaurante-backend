@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -63,7 +65,7 @@ public class VentaController {
 //		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdVenta()).toUri();
 //		return ResponseEntity.created(location).build();
 //	}
-//	
+	
 	@PutMapping
 	public ResponseEntity<Venta> modificar(@Valid @RequestBody Venta p) throws Exception{
 //		System.out.println("4 ");
@@ -82,5 +84,11 @@ public class VentaController {
 			
 		iVentaService.eliminar(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	
+	@GetMapping("/pageable")
+	public ResponseEntity<Page<Venta>> listarPageable(Pageable pageable) throws Exception{			
+		Page<Venta> paginas = iVentaService.listarPageable(pageable);
+		return new ResponseEntity<Page<Venta>>(paginas, HttpStatus.OK);
 	}
 }

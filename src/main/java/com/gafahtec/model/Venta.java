@@ -41,6 +41,7 @@ public class Venta {
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_recibo", nullable = false, foreignKey = @ForeignKey(name = "FK_tipo_recibo"))
 	private TipoRecibo tipoRecibo;
+
 	private Float efectivo;
 	private Float visa;
 	private Float mastercard;

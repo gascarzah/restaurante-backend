@@ -19,4 +19,6 @@ public interface IPedidoService extends ICRUD<Pedido, Integer>{
 	Page<Pedido> listarPageable(Pageable pageable);
 	Pedido actualizarEstado(@Valid Pedido p);
 	public Page<PedidoBean> listarPageableConDetalle(Pageable pageable);
+	
+//	public Page<Pedido> findByTipoVenta(Integer idTipoPedido, Pageable pageable)
 }

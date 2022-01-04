@@ -4,13 +4,17 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.hibernate.annotations.Parent;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.gafahtec.bean.PedidoBean;
@@ -67,7 +71,7 @@ public class PedidoServiceImpl  extends CRUDImpl<Pedido, Integer>  implements IP
 		//graba pedido
 		String randomId = UUID.randomUUID().toString();
 		dto.getPedido().setRandomId(randomId);
-//		dto.getPedido().setMesas(dto.getMesas());
+		dto.getPedido().setMesas(dto.getMesas());
 		
 		repo.save(dto.getPedido());
 		
@@ -81,16 +85,16 @@ public class PedidoServiceImpl  extends CRUDImpl<Pedido, Integer>  implements IP
 		});
 //		System.out.println(p);
 		
-//		System.out.println(dto.getMesas());
-//		dto.getMesas().forEach( m-> {
-//		m.setOcupado(true);	
-//		try {
-//			iMesaService.registrar(m);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		});
+		System.out.println(dto.getMesas());
+		dto.getMesas().forEach( m-> {
+		m.setOcupado(true);	
+		try {
+			iMesaService.registrar(m);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		});
 		
 		
 		return p;
@@ -102,16 +106,16 @@ public class PedidoServiceImpl  extends CRUDImpl<Pedido, Integer>  implements IP
 	
 		
 		
-//		repo
-//		.findAll().stream().filter(pmd -> !pmd.isPagado())
-//		.forEach( entry -> {
-//			lista.add(PedidoMesaDto
-//					.builder()
-//					.pedido(entry)
-//					.idPedido(entry.getIdPedido())
-//					.numMesa( entry.getMesas().stream().map(m-> m.getCodigo()).collect(Collectors.joining("-"))).build());
-//			
-//		});
+		repo
+		.findAll().stream().filter(pmd -> !pmd.isPagado() ).filter(pmd -> pmd.getTipoPedido().getIdTipoPedido() == 2)
+		.forEach( entry -> {
+			lista.add(PedidoMesaDto
+					.builder()
+					.pedido(entry)
+					.idPedido(entry.getIdPedido())
+					.numMesa( entry.getMesas().stream().map(m-> m.getCodigo()).collect(Collectors.joining("-"))).build());
+			
+		});
 		
 
 		
@@ -123,10 +127,13 @@ public class PedidoServiceImpl  extends CRUDImpl<Pedido, Integer>  implements IP
 		return repo.findAll(pageable);
 	}
 
-	
+	public Page<Pedido> findByTipoVenta(Integer idTipoPedido, Pageable pageable) {
+		return repo.findByTipoVenta(idTipoPedido,pageable);
+	}
 	
 	public Page<PedidoBean> listarPageableConDetalle(Pageable pageable) {
-		 Page<Pedido> listaPedidoPaginado = repo.findAll(pageable);
+		 List<Pedido> pedidos = repo.findAll(pageable).getContent().stream().filter(p->p.getTipoPedido().getIdTipoPedido() == 1).collect(Collectors.toList());
+		 Page<Pedido> listaPedidoPaginado = new PageImpl<>(pedidos, pageable, pedidos.size());
 		 Page<PedidoBean> pedidoDto = listaPedidoPaginado.map( pedido -> {
 			
 			PedidoBean pedidoBean = new PedidoBean();

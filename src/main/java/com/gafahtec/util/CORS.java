@@ -36,7 +36,7 @@ public class CORS implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 
 		 String origin = request.getHeader("Origin");
-		 System.out.println(origin);
+//		 System.out.println(origin);
          response.setHeader("Access-Control-Allow-Origin", allowedOrigins.contains(origin) ? origin : "");
 //         response.setHeader("Vary", "Origin");
          response.setHeader("Access-Control-Allow-Credentials", "true");

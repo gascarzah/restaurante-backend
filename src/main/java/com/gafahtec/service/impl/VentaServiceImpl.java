@@ -5,12 +5,15 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.gafahtec.dto.VentaDto;
 import com.gafahtec.model.Pedido;
 import com.gafahtec.model.Venta;
 import com.gafahtec.repository.IGenericRepository;
+import com.gafahtec.repository.IMesaRepository;
 import com.gafahtec.repository.IPedidoDetalleRepository;
 import com.gafahtec.repository.IPedidoRepository;
 import com.gafahtec.repository.IProductoRepository;
@@ -26,7 +29,7 @@ public class VentaServiceImpl extends CRUDImpl<Venta, Integer> implements IVenta
 
 	private IVentaRepository repo;
 	private IPedidoRepository pedidoRepo;
-//	private IMesaRepository mesaRepo;
+	private IMesaRepository mesaRepo;
 	private IProductoRepository productoRepo;
 	private IPedidoDetalleRepository pedidoDetalleRepo;
 	
@@ -43,14 +46,15 @@ public class VentaServiceImpl extends CRUDImpl<Venta, Integer> implements IVenta
 	@Transactional
 	@Override
 	public Venta registrarTransaccion(@Valid VentaDto v) {
-		
+		 if(v.getPedido().getTipoPedido().getIdTipoPedido() == 1) {
 		//graba pedido
 		String randomId = UUID.randomUUID().toString();
 		v.getPedido().setRandomId(randomId);
 		v.getPedido().setPagado(true);
 		pedidoRepo.save(v.getPedido());
+
 		Pedido newPedido = pedidoRepo.findByRandomId(randomId).get(0);
-		
+	
 		//graba pedido detalle
 		v.getPedidoDetalles().forEach( pdt -> {
 		pdt.setPedido(newPedido);
@@ -66,21 +70,23 @@ public class VentaServiceImpl extends CRUDImpl<Venta, Integer> implements IVenta
 			productoRepo.actualizar(p.getIdProducto(), p.getStock());
 		});
 		// Notify frontend that there has been a change on entity
-        notifyFrontend();
-//		
+       notifyFrontend();
+		 }
 
 		
-//		repo.save(v);
-//
-//		v.getPedido().setPagado(true);
-//		pedidoRepo.actualizar(v.getPedido().getIdPedido());
+       if(v.getPedido().getTipoPedido().getIdTipoPedido() == 2) {
+    	repo.save(v.getVenta());
+		v.getPedido().setPagado(true);
+		pedidoRepo.actualizar(v.getPedido().getIdPedido());
 
-//		p.getPedido().getMesas().forEach(mesa -> {
-//			mesaRepo.actualizar(mesa.getIdMesa(), false);
-//		});
-
+		v.getPedido().getMesas().forEach(mesa -> {
+			mesaRepo.actualizar(mesa.getIdMesa(), false);
+		});
+       }
 		return v.getVenta();
 	}
+	
+	
 	
     protected String getEntityTopic() {
         return "venta";
@@ -95,4 +101,11 @@ public class VentaServiceImpl extends CRUDImpl<Venta, Integer> implements IVenta
 
         webSocketService.sendMessage(entityTopic);
     }
+    
+    
+	@Override
+	public Page<Venta> listarPageable(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return repo.findAll(pageable);
+	}
 }
